@@ -3,48 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Job Application Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="bg-[#F8FAFC] my-[60px] ">
-    <header class="container w-[1100px] mx-auto bg-white space-y-5">
+    <header class=" w-[1100px] mx-auto bg-white space-y-5">
+        
         <h2 class="text-3xl font-bold text-[#002C5C]">Job Application Tracker</h2>
 
         <div class="card-container flex  gap-4 ">
             <div class="w-[350px] border p-2 rounded-[8px]  border-[#f1f2f4FF]">
                 <p class="text-[#323b49FF]">total</p>
-                 <p class="font-bold text-2xl">8</p>
+                 <p class="font-bold text-2xl" id="stat-total">0</p>
             </div>
             <div class="w-[350px] border p-2 rounded-[8px]  border-[#f1f2f4FF]">
                 <p class="text-[#323b49FF]">Interview</p>
-                 <p class="font-bold text-2xl text-[#10b981FF]">0</p>
+                 <p class="font-bold text-2xl text-[#10b981FF]" id="stat-interview">0</p>
             </div>
             <div class="w-[350px] border p-2 rounded-[8px]  border-[#f1f2f4FF]">
                 <p class="text-[#323b49FF]">Rejected</p>
-                <p class="font-bold text-2xl text-[#ef4444FF]">0</p>
+                <p class="font-bold text-2xl text-[#ef4444FF]" id="stat-rejected">0</p>
             </div>
         </div>
 
            <hr class="border border-[#e6e7e9FF]">
     </header>
 
- 
 
-    <section class="container w-[1100px] mx-auto bg-white mt-7 space-y-5">
+     <section class="w-[1100px] mx-auto bg-white mt-7 space-y-5">
         <div class="flex justify-between">
             <p class="text-[#002c5cFF]">Available Jobs</p>
-            <p class="text-[#64748bFF]">8 jobs</p>
+            <p class="text-[#64748bFF]"><span id="available">8</span> jobs</p>
         </div>
       <div class=" flex gap-[8px]">
-        <button class="border bg-[#3b82f6FF] py-[10px] px-[32px] rounded-[4px]">All</button>
-        <button class="border bg-[#ffffffFF] py-[10px] px-[32px] rounded-[4px]">Interview</button>
-        <button class="border bg-[#ffffffFF] py-[10px] px-[32px] rounded-[4px]">Rejected</button>
+        <button id="tab-all"  onclick="switchTab('all')" class="border 3b82f6FF] py-[10px] px-[32px] rounded-[4px]">All</button>
+        <button id="tab-interview" onclick="switchTab('interview')" class="border bg-[#ffffffFF] py-[10px] px-[32px] rounded-[4px]">Interview</button>
+        <button id="tab-rejected" onclick="switchTab('rejected')" class="border bg-[#ffffffFF] py-[10px] px-[32px] rounded-[4px]">Rejected</button>
       </div>
     </section>
-<!-- card-1 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
-    <div class="left  space-y-5">
+
+
+
+
+    <section id="job-container" class=" w-[1100px] mx-auto">
+        <div id="all-section" class=" hidden  all-section">
+    <section  class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+    <div class="left  space-y-5 ">
         
         <div class="">
             <h4 class="text-[#002c5cFF] font-bold">Mobile First Corp</h4>
@@ -56,23 +61,23 @@
         <p class="text-sm text-[#64748bFF]">Remote• Full-time • $130,000 - $175,000</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
-
+        
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete"><i class="fa-solid fa-trash-can pointer-events-none"></i></span>
     </div>
-</section>
+    </section>
 
-<!-- card-2 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+    <!-- card-2 -->
+     <section class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
     <div class="left  space-y-5">
         
         <div class="">
@@ -85,22 +90,24 @@
         <p class="text-sm text-[#64748bFF]">Los Angeles, CA• Part-time •$80,000 - $120,000</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
 
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete" ><i class="fa-solid fa-trash-can pointer-events-none"></i></span>
     </div>
-</section>
-<!-- card-3 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+     </section>
+
+
+     <!-- card-3 -->
+     <section class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
     <div class="left  space-y-5">
         
         <div class="">
@@ -113,22 +120,23 @@
         <p class="text-sm text-[#64748bFF]">Boston, MA •Full-time•$125,000 - $165,000</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">Transform complex data into compelling visualizations. Required skills: D3.js, React, and strong analytical thinking.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
 
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete"><i class="fa-solid fa-trash-can pointer-events-none"></i></span>
     </div>
-</section>
-<!-- card-4 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+     </section>
+
+     <!-- card-4 -->
+     <section class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
     <div class="left  space-y-5">
         
         <div class="">
@@ -141,23 +149,23 @@
         <p class="text-sm text-[#64748bFF]">Seattle, WA • Full-time • $140,000 - $190,000</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
 
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete"><i class="fa-solid fa-trash-can pointer-events-none"></i></span>
     </div>
-</section>
+     </section>
 
-<!-- card-5 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+     <!-- card-5 -->
+     <section class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
     <div class="left  space-y-5">
         
         <div class="">
@@ -170,22 +178,24 @@
         <p class="text-sm text-[#64748bFF]">Austin, TX • Full-time • $110,000 - $150,000</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">Create beautiful and functional user interfaces for our suite of products. Strong design skills and frontend development expertise required.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
 
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete"><i class="fa-solid fa-trash-can pointer-events-none "></i></span>
     </div>
-</section>
-<!-- card-6 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+     </section>
+
+
+     <!-- card-6 -->
+    <section class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
     <div class="left  space-y-5">
         
         <div class="">
@@ -198,23 +208,25 @@
         <p class="text-sm text-[#64748bFF]">New York, N • Full-time  $130,000 - $170,00</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
 
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete"><i class="fa-solid fa-trash-can pointer-events-none"></i></span>
     </div>
-</section>
+    </section>
 
-<!-- card-7 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+
+
+    <!-- card-7 -->
+    <section class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
     <div class="left  space-y-5">
         
         <div class="">
@@ -227,22 +239,25 @@
         <p class="text-sm text-[#64748bFF]">Remote • Full-time • $120,000 - $160,000</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">Join our fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
 
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete"><i class="fa-solid fa-trash-can pointer-events-none"></i></span>
     </div>
-</section>
-<!-- card-8 -->
-<section class="container w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
+    </section>
+
+
+
+    <!-- card-8 -->
+    <section class="card w-[1100px] mx-auto flex justify-between bg-white mt-7 p-6 ">
     <div class="left  space-y-5">
         
         <div class="">
@@ -255,20 +270,42 @@
         <p class="text-sm text-[#64748bFF]">San Francisco, CA • Full-time • $130,000 - $175,000</p>
 
        <div>
-        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px]">Not Applied</button>
+        <button class=" bg-[#eef4ffFF] py-2 px-3 rounded-[4px] status">Not Applied</button>
         <p class="text-[#323b49FF] text-sm">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.</p>
 
        </div>
         <div class="gap-2">
-            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase">interview</button>
-            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase">Rejected</button>
+            <button class="border py-2 px-3 font-bold text-[#10b981FF] uppercase interview">interview</button>
+            <button class="border py-2 px-3 font-bold text-[#ef4444FF] uppercase rejected">Rejected</button>
         </div>
 
     </div>
     <div class="right  ">
-        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2"><i class="fa-solid fa-trash-can"></i></span>
+        <span class="rounded-[50px] border border-[#f1f2f4FF] p-2 delete"><i class="fa-solid fa-trash-can pointer-events-none"></i></span>
     </div>
-</section>
+   </section>
+
+        </div>
+
+        <section id="interview-container" class="hidden"></section>
+        <section id="rejected-container" class="hidden"></section>
+    </section>
+
+
+
+
+0
+
+
+<footer id="empty-state" class="hidden w-[1100px] mx-auto  justify-between bg-white mt-7 p-6 ">
+   <div class="text-center my-[110px] ">
+    <div class="flex justify-center items-center">
+        <img src="jobs.png" alt="">
+    </div>
+    <p class="text-[#002c5cFF] text-2xl font-bold">No jobs available</p>
+    <p class="text-[#64748bFF]">Check back soon for new job opportunities</p>
+   </div>
+</footer>
 
 
     <script src="script/hello.js"></script>
