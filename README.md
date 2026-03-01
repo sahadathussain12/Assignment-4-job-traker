@@ -38,3 +38,6 @@ event delegation is a technique where ou atach a single event listener to a pare
 ### 5. What is the difference between preventDefault() and stopPropagation() methods?
 
 5 NO ANSWER.
+preventDefault() stops the default browser behavior like preventing a form from submitting.
+
+stopPropagtion() stops the event from bubbling up to parent elements
